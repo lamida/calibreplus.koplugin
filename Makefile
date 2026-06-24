@@ -2,6 +2,13 @@ KOREADER_DIR ?= $(HOME)/github/koreader/koreader
 PLUGIN_LINK   := $(KOREADER_DIR)/plugins/calibreplus.koplugin
 SPEC_LINK     := $(KOREADER_DIR)/spec/unit/calibreplus_db_spec.lua
 
+# macOS: Homebrew GNU tools must precede system tools.
+# Install prerequisites: brew install gnu-getopt make util-linux bash findutils
+ifeq ($(shell uname),Darwin)
+export PATH := /opt/homebrew/opt/gnu-getopt/bin:/opt/homebrew/opt/make/libexec/gnubin:/opt/homebrew/opt/util-linux/bin:/opt/homebrew/bin:$(PATH)
+SHELL := /opt/homebrew/bin/bash
+endif
+
 .PHONY: install uninstall test
 
 install:
@@ -11,5 +18,7 @@ install:
 uninstall:
 	rm -f "$(PLUGIN_LINK)" "$(SPEC_LINK)"
 
+# Requires a built KOReader emulator in KOREADER_DIR.
+# First-time setup: cd $(KOREADER_DIR) && ./kodev fetch-thirdparty && ./kodev build
 test: install
 	cd "$(KOREADER_DIR)" && ./kodev test front calibreplus_db_spec.lua
