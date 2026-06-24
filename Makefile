@@ -21,4 +21,8 @@ uninstall:
 # Requires a built KOReader emulator in KOREADER_DIR.
 # First-time setup: cd $(KOREADER_DIR) && ./kodev fetch-thirdparty && ./kodev build
 test: install
-	cd "$(KOREADER_DIR)" && ./kodev test front calibreplus_db_spec.lua
+	@KODIR=$$(find "$(KOREADER_DIR)" -maxdepth 3 -name "koreader.sh" -path "*/koreader-emulator-*" -exec dirname {} \; 2>/dev/null | head -1); \
+	if [ -z "$$KODIR" ]; then \
+	  echo "ERROR: emulator not built. Run: cd $(KOREADER_DIR) && ./kodev build"; exit 1; \
+	fi; \
+	cd "$$KODIR" && spec/runtests front calibreplus_db
