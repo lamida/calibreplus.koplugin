@@ -2,7 +2,7 @@
 
 A [KOReader](https://github.com/koreader/koreader) plugin that browses a calibre library directly from its `metadata.db` and opens books in the reader.
 
-This complements the built-in `calibre.koplugin` (wireless transfer / device metadata search). Instead of syncing over the network, Calibre+ points at a calibre library folder on disk — the one holding `metadata.db` — and lists the full catalog. Selecting a book resolves its file and opens it immediately.
+Calibre+ points at a calibre library folder on disk — the one holding `metadata.db` — and lists the full catalog. Selecting a book resolves its file and opens it immediately. You sync the library, books and metadata.db before hands. You can use rsync or some other ways.
 
 ## Features
 
