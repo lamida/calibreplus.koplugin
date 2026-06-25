@@ -10,8 +10,8 @@ Design note (responsiveness): the catalog is read once with @{queryAllBooks}; th
 then filters and sorts that in-memory list with @{filterBooks} / @{sortBooks}, so
 typing in the filter or changing the sort never hits the database again. File
 resolution (@{resolveBookPath}) is a single stat plus, at worst, a scan of one book
-directory: it never enumerates the whole library, which is what made the original
-cicicaba app block (its SAF tree walk) and trip Android's "isn't responding" dialog.
+directory: it never enumerates the whole library, which is what made an earlier
+approach block (its SAF tree walk) and trip Android's "isn't responding" dialog.
 
 @module calibreplus.db
 --]]
